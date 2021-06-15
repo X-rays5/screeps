@@ -3205,6 +3205,8 @@ interface Memory {
 }
 
 interface CreepMemory {
+    job: string;
+    type: any;
     building: boolean;
 }
 interface FlagMemory {}
