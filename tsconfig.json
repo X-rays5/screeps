@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "module": "commonjs",
     "lib": [
 		"es6"
     ],
+    "target": "ES6",
     "removeComments": true,
 	"noImplicitAny": true,
     "noImplicitThis": true,
