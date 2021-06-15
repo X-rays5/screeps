@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "lib": [
+		"es6"
+    ],
+    "removeComments": true,
+	"noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "sourceMap": false,
+	"types": ["node"],
+	"baseUrl": "../",
+    "typeRoots": [
+		"../"
+    ],
+	"outDir": "C:/Users/X-ray/AppData/Local/Screeps/scripts/screeps.com/default",
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "*",
+    "**/*"
+  ]
+}
