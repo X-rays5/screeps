@@ -1,4 +1,4 @@
-const upgraders = 2;
+const upgraders = 3;
 
 var UpgraderUpkeep: any = {
     run: function () {
@@ -13,7 +13,10 @@ var UpgraderUpkeep: any = {
         }
         if (cur_upgraders < upgraders) {
             // @ts-ignore
-            Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], 'screep_' + Game.time, {memory: {job: 'upgrade'}});
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,CARRY, CARRY, MOVE,MOVE], 'screep_' + Game.time, {memory: {job: 'upgrade'}}) !== 0) {
+                // @ts-ignore
+                Game.spawns['Spawn1'].spawnCreep([WORK,CARRY, MOVE, MOVE], 'screep_' + Game.time, {memory: {job: 'upgrade'}});
+            }
         }
         console.log(cur_upgraders + ' upgraders');
     }
