@@ -16,13 +16,12 @@
     "typeRoots": [
 		"../"
     ],
-	"outDir": "C:/Users/X-ray/AppData/Local/Screeps/scripts/screeps.com/default",
+	"outDir": "C:/Users/X-ray/AppData/Local/Screeps/scripts/screeps.com/default"
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "*",
-    "**/*"
+    "*"
   ]
 }
