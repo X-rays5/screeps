@@ -16,11 +16,14 @@ module.exports.loop = function () {
     UpgraderUpkeep.run();
     BuilderUpkeep.run();
 
-
-    if(Game.spawns['Spawn1'].spawning) {
-        const spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-        // @ts-ignore
-        Game.spawns['Spawn1'].room.visual.text('🛠️' + spawningCreep.memory.job, Game.spawns['Spawn1'].pos.x + 1, Game.spawns['Spawn1'].pos.y, {align: 'left', opacity: 0.8});
+    for (const name in Game.spawns) {
+        const spawn = Game.spawns[name];
+        if (spawn.spawning) {
+            // @ts-ignore
+            const spawningCreep = Game.creeps[spawn.spawning.name];
+            // @ts-ignore
+            spawn.room.visual.text('🛠️' + spawningCreep.memory.job, spawn.pos.x + 1, spawn.pos.y, {align: 'left', opacity: 0.8});
+        }
     }
 
     for(const name in Game.creeps) {
