@@ -1,5 +1,9 @@
 // pretick
 var CleanUp = require('pretick.cleanup');
+var HarvesterUpkeep = require('pretick.harvester_upkeep');
+var UpgraderUpkeep = require('pretick.upgrader_upkeep');
+var BuilderUpkeep = require('pretick.builder_upkeep');
+
 // jobs
 var roleHarvester = require('job.harvest');
 var roleUpgrader = require('job.upgrade');
@@ -8,6 +12,9 @@ var roleBuilder = require('job.builder');
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
     CleanUp.run();
+    HarvesterUpkeep.run();
+    UpgraderUpkeep.run();
+    BuilderUpkeep.run();
 
     // @ts-ignore
     const harvesters = _.filter(Game.creeps, (creep) => creep.memory.job == 'harvest');
