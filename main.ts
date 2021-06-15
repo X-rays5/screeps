@@ -16,16 +16,6 @@ module.exports.loop = function () {
     UpgraderUpkeep.run();
     BuilderUpkeep.run();
 
-    // @ts-ignore
-    const harvesters = _.filter(Game.creeps, (creep) => creep.memory.job == 'harvest');
-    console.log('Harvesters: ' + harvesters.length);
-
-    if(harvesters.length < 2) {
-        const newName = 'screep_' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
-        // @ts-ignore
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, {memory: {job: 'harvest'}});
-    }
 
     if(Game.spawns['Spawn1'].spawning) {
         const spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
