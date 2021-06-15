@@ -4,6 +4,7 @@ var roleBuilder = require('job.builder');
 var CleanUp = require('pretick.cleanup');
 
 module.exports.loop = function () {
+    console.log(`----- tick: ${Game.time} start -----`);
     CleanUp.run();
 
     // @ts-ignore
@@ -38,4 +39,5 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
     }
+    console.log(`----- tick: ${Game.time} end -----`);
 }
