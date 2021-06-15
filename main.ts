@@ -1,7 +1,9 @@
+// pretick
+var CleanUp = require('pretick.cleanup');
+// jobs
 var roleHarvester = require('job.harvest');
 var roleUpgrader = require('job.upgrade');
 var roleBuilder = require('job.builder');
-var CleanUp = require('pretick.cleanup');
 
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
