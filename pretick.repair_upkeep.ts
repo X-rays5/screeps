@@ -1,4 +1,4 @@
-const repair = 2;
+const repair = 4;
 
 var RepairUpkeep: any = {
     run: function () {
@@ -14,7 +14,7 @@ var RepairUpkeep: any = {
         if (cur_builders < repair) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE,MOVE], 'screep_' + Game.time, {memory: {job: 'repair'}}) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], `screep_repair_${Game.time}`, {memory: {job: 'repair'}}) === 0) {
                 console.log("spawning new repair");
             }
         }

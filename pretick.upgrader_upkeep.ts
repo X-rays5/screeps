@@ -14,7 +14,7 @@ var UpgraderUpkeep: any = {
         if (cur_upgraders < upgraders) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], 'screep_' + Game.time, {memory: {job: 'upgrade'}}) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], `screep_upgrade_${Game.time}`, {memory: {job: 'upgrade'}}) === 0) {
                 console.log("spawning new upgrader");
             }
         }
