@@ -1,4 +1,4 @@
-const builders = 2;
+const builders = 3;
 
 var BuilderUpkeep: any = {
     run: function () {
@@ -13,9 +13,11 @@ var BuilderUpkeep: any = {
         }
         if (cur_builders < builders) {
             // @ts-ignore
-            Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], 'screep_' + Game.time, {memory: {job: 'builder'}});
+            // only log on success
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE], 'screep_' + Game.time, {memory: {job: 'builder'}}) === 0) {
+                console.log("spawning new builder");
+            }
         }
-        console.log(cur_builders + ' builders');
     }
 }
 
