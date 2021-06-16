@@ -13,15 +13,19 @@ var RoleHarvest: any = {
         else {
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) || structure.structureType === STRUCTURE_CONTAINER &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) || structure.structureType === STRUCTURE_CONTAINER;
                 }
             });
 
-
             if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                for (let i = 0; i < targets.length; i++) {
+                    if (targets[i].store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                        console.log(targets[i]);
+                        if(creep.transfer(targets[i], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(targets[i], {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
+                        return;
+                    }
                 }
             } else {
                 // make sure they are not blocking the resource collection
