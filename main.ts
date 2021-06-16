@@ -8,6 +8,7 @@ var roleBuilder = require('job.builder');
 var roleRepair = require('job.repair');
 var roleHeal = require('job.heal');
 var roleDefend = require('job.defend');
+var roleCarry = require('job.carrier');
 
 const job_handlers: Map<string, any> = new Map(
     [
@@ -16,7 +17,8 @@ const job_handlers: Map<string, any> = new Map(
         ["builder", roleBuilder],
         ["repair", roleRepair],
         ["heal", roleHeal],
-        ["defend", roleDefend]
+        ["defend", roleDefend],
+        ["carry", roleCarry]
     ])
 
 let last_pretick_run = 0;
