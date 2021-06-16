@@ -1,4 +1,4 @@
-const builders = 3;
+const builders = 2;
 
 var BuilderUpkeep: any = {
     run: function () {
