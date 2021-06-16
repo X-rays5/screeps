@@ -44,8 +44,7 @@ module.exports.loop = function () {
             if (spawn.spawning) {
                 // @ts-ignore
                 const spawningCreep = Game.creeps[spawn.spawning.name];
-                // @ts-ignore
-                spawn.room.visual.text('🛠️' + spawningCreep.memory.job, spawn.pos.x + 1, spawn.pos.y, {align: 'left', opacity: 0.8});
+                spawn.memory.lastspawned = spawningCreep.memory.job
             }
         }
         last_spawn_notify_prod = Game.time;
