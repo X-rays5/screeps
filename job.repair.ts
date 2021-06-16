@@ -1,3 +1,10 @@
+const repair_structures: Map<any, boolean> = new Map(
+    [
+        [STRUCTURE_WALL, true],
+        [STRUCTURE_ROAD, true],
+        [STRUCTURE_EXTENSION, true]
+    ]);
+
 var RoleRepair: any = {
     run: function (creep: Creep) {
         if(creep.memory.repairing && creep.store[RESOURCE_ENERGY] == 0) {
@@ -12,11 +19,14 @@ var RoleRepair: any = {
         if (creep.memory.repairing) {
             const structures: Structure[] = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_WALL && structure.hits / structure.hitsMax * 100 < 0.01);
+                    return (
+                        structure.hits / structure.hitsMax * 100 < 50 && repair_structures.has(structure.structureType)
+                    );
                 }
             })
 
-            for (const structure in structures) {
+            for (let i = 0; i < structures.length; i++) {
+                const structure: Structure = structures[i];
                 // @ts-ignore
                 if (structure.structureType == STRUCTURE_WALL) {
                     // @ts-ignore
@@ -24,7 +34,7 @@ var RoleRepair: any = {
                         // @ts-ignore
                         if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                             // @ts-ignore
-                            creep.moveTo(structure.pos);
+                            creep.moveTo(structure);
                         }
                     } else {
                         continue;
@@ -33,14 +43,21 @@ var RoleRepair: any = {
                     // @ts-ignore
                     if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                         // @ts-ignore
-                        creep.moveTo(structure.pos);
+                        creep.moveTo(structure);
                     }
+                    break;
                 }
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            for (let i = 0; i < sources.length; i++) {
+                const source = sources[i];
+                if (source.energy > 50) {
+                    if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(source);
+                    }
+                    break;
+                }
             }
         }
     }
