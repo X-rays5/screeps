@@ -28,10 +28,19 @@ var RoleRepair: any = {
 
             for (let i = 0; i < structures.length; i++) {
                 const structure: Structure = structures[i];
-                // @ts-ignore
                 if (structure.structureType == STRUCTURE_WALL) {
                     // @ts-ignore
                     if (structure.hits / structure.hitsMax * 100 < 0.01) {
+                        // @ts-ignore
+                        if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
+                            // @ts-ignore
+                            creep.moveTo(structure);
+                        }
+                    } else {
+                        continue;
+                    }
+                } else if (structure.structureType == STRUCTURE_RAMPART) {
+                    if (structure.hits / structure.hitsMax * 100 < 10) {
                         // @ts-ignore
                         if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                             // @ts-ignore
