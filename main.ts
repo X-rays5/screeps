@@ -27,6 +27,7 @@ let last_spawn_notify_prod = 0;
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
     if (Game.time - last_pretick_run >= 10) {
+        console.log("running pretick jobs");
         for (const name in Game.rooms) {
             Game.rooms[name].memory.heal_targets = [];
         }
