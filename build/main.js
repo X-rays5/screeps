@@ -7,6 +7,7 @@ var roleUpgrader = require('job.upgrade');
 var roleBuilder = require('job.builder');
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
+    console.log("test");
     CleanUp.run();
     HarvesterUpkeep.run();
     UpgraderUpkeep.run();
