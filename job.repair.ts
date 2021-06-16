@@ -2,7 +2,8 @@ const repair_structures: Map<any, boolean> = new Map(
     [
         [STRUCTURE_WALL, true],
         [STRUCTURE_ROAD, true],
-        [STRUCTURE_EXTENSION, true]
+        [STRUCTURE_EXTENSION, true],
+        [STRUCTURE_RAMPART, true]
     ]);
 
 var RoleRepair: any = {
