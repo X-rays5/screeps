@@ -14,7 +14,7 @@ var BuilderUpkeep: any = {
         if (cur_builders < builders) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE], `screep_builder_${Game.time}`, {memory: {job: 'builder'}}) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], `screep_builder_${Game.time}`, {memory: {job: 'builder'}}) === 0) {
                 console.log("spawning new builder");
             }
         }
