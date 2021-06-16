@@ -1,3 +1,5 @@
+var harvester = require('job.harvest')
+
 var roleBuilder: any = {
 
     /** @param {Creep} creep **/
@@ -19,21 +21,8 @@ var roleBuilder: any = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
-                const targets: AnyStructure[] = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure: Structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                    }
-                });
-
-                if (targets.length > 0) {
-                    if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
-                } else {
-                    // make sure they are not blocking the resource collection
-                    creep.moveTo(Game.flags["harvester_idle"]);
-                }
+                // no build jobs so help the harvesters
+                harvester.run(creep);
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);
