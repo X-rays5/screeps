@@ -3212,7 +3212,9 @@ interface CreepMemory {
 }
 interface FlagMemory {}
 interface PowerCreepMemory {}
-interface RoomMemory {}
+interface RoomMemory {
+    heal_targets: Array<Creep>;
+}
 interface SpawnMemory {
     lastspawned: string;
 }
