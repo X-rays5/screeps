@@ -61,6 +61,8 @@ var RoleCarrier: any = {
                         if (creep.withdraw(containers[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                             creep.moveTo(containers[0]);
                         }
+                    } else {
+                        creep.moveTo(Game.flags["carrier_idle"]);
                     }
                 }
             }
