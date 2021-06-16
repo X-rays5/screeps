@@ -1,13 +1,13 @@
 var RoleHarvest: any = {
     run: function(creep: Creep) {
         if(!creep.memory.drop_off && creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
-            var sources = creep.room.find(FIND_SOURCES, {
+            const sources = creep.room.find(FIND_SOURCES, {
                 filter: (source) => {
                     return (source.energy > 50);
                 }
                 });
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveTo(sources[0]);
             }
         }
         else {
@@ -25,9 +25,8 @@ var RoleHarvest: any = {
             if(targets.length > 0) {
                 for (let i = 0; i < targets.length; i++) {
                     if (targets[i].store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
-                        console.log(targets[i]);
                         if(creep.transfer(targets[i], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(targets[i], {visualizePathStyle: {stroke: '#ffffff'}});
+                            creep.moveTo(targets[i]);
                         }
                         return;
                     }

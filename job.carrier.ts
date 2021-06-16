@@ -8,7 +8,7 @@ var RoleCarrier: any = {
             })
             if (tombstones.length > 0) {
                 if (creep.withdraw(tombstones[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(tombstones[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(tombstones[0]);
                 }
                 return;
             } else {
@@ -19,7 +19,7 @@ var RoleCarrier: any = {
                 })
                 if (ruins.length > 0) {
                     if (creep.withdraw(ruins[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(ruins[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(ruins[0]);
                     }
                 } else {
                     const dropped_energy = creep.room.find(FIND_DROPPED_RESOURCES, {
@@ -29,7 +29,7 @@ var RoleCarrier: any = {
                     })
                     if (dropped_energy.length > 0) {
                         if (creep.pickup(dropped_energy[0]) === ERR_NOT_IN_RANGE) {
-                            creep.moveTo(dropped_energy[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                            creep.moveTo(dropped_energy[0]);
                         }
                         return;
                     } else {
@@ -46,7 +46,7 @@ var RoleCarrier: any = {
                             })
                             if (containers.length > 0) {
                                 if (creep.withdraw(containers[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                                    creep.moveTo(containers[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                                    creep.moveTo(containers[0]);
                                 }
                                 return;
                             } else {
@@ -70,7 +70,7 @@ var RoleCarrier: any = {
 
             if (extensions.length > 0) {
                 if (creep.transfer(extensions[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(extensions[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(extensions[0]);
                 }
                 return;
             } else {
@@ -81,7 +81,7 @@ var RoleCarrier: any = {
                 })
                 if (containers.length > 0) {
                     if (creep.transfer(containers[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(containers[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(containers[0]);
                     }
                     return;
                 } else {
