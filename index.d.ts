@@ -3205,6 +3205,7 @@ interface Memory {
 }
 
 interface CreepMemory {
+    drop_off: boolean;
     upgrading: boolean;
     storing: boolean;
     collecting: boolean;
