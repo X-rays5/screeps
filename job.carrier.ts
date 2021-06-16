@@ -1,37 +1,37 @@
 var RoleCarrier: any = {
     run: function (creep: Creep) {
         if(!creep.memory.drop_off && creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
-            const tombstones = creep.room.find(FIND_TOMBSTONES, {
-                filter: (structure) => {
-                    return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0)
+            const dropped_energy = creep.room.find(FIND_DROPPED_RESOURCES, {
+                filter: (resource) => {
+                    return (resource.resourceType === RESOURCE_ENERGY)
                 }
             })
-            if (tombstones.length > 0) {
-                if (creep.withdraw(tombstones[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(tombstones[0]);
+            if (dropped_energy.length > 0) {
+                if (creep.pickup(dropped_energy[0]) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(dropped_energy[0]);
                 }
                 return;
             } else {
-                const ruins = creep.room.find(FIND_RUINS, {
-                    filter: (ruin) => {
-                        return (ruin.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+                const tombstones = creep.room.find(FIND_TOMBSTONES, {
+                    filter: (structure) => {
+                        return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0)
                     }
                 })
-                if (ruins.length > 0) {
-                    if (creep.withdraw(ruins[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(ruins[0]);
+                if (tombstones.length > 0) {
+                    if (creep.withdraw(tombstones[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(tombstones[0]);
                     }
+                    return;
                 } else {
-                    const dropped_energy = creep.room.find(FIND_DROPPED_RESOURCES, {
-                        filter: (resource) => {
-                            return (resource.resourceType === RESOURCE_ENERGY)
+                    const ruins = creep.room.find(FIND_RUINS, {
+                        filter: (ruin) => {
+                            return (ruin.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
                         }
                     })
-                    if (dropped_energy.length > 0) {
-                        if (creep.pickup(dropped_energy[0]) === ERR_NOT_IN_RANGE) {
-                            creep.moveTo(dropped_energy[0]);
+                    if (ruins.length > 0) {
+                        if (creep.withdraw(ruins[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                            creep.moveTo(ruins[0]);
                         }
-                        return;
                     } else {
                         const extensions = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
