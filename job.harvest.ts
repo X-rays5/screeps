@@ -11,9 +11,9 @@ var RoleHarvest: any = {
             }
         }
         else {
-            const targets: AnyStructure[] = creep.room.find(FIND_STRUCTURES, {
+            const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) || structure.structureType === STRUCTURE_CONTAINER &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
