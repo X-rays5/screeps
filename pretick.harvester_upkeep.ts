@@ -1,6 +1,6 @@
 var HarvesterUpkeep: any = {
     run: function () {
-        const small_harvesters = 3;
+        const small_harvesters = 1;
         const big_harvesters = 2;
         const small_name = 'small';
         const big_name = 'big';
