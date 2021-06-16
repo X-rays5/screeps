@@ -3213,7 +3213,9 @@ interface CreepMemory {
 interface FlagMemory {}
 interface PowerCreepMemory {}
 interface RoomMemory {}
-interface SpawnMemory {}
+interface SpawnMemory {
+    lastspawned: string;
+}
 
 declare const Memory: Memory;
 /**
