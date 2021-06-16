@@ -1,4 +1,4 @@
-const upgraders = 4;
+const upgraders = 3;
 
 var UpgraderUpkeep: any = {
     run: function () {
