@@ -18,7 +18,7 @@ const job_handlers: Map<string, any> = new Map(
         ["repair", roleRepair],
         ["heal", roleHeal],
         ["defend", roleDefend],
-       // ["carry", roleCarry]
+        ["carry", roleCarry]
     ])
 
 let last_pretick_run = 0;
