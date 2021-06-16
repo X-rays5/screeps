@@ -3205,9 +3205,10 @@ interface Memory {
 }
 
 interface CreepMemory {
-    job: string;
+    repairing: boolean;
     type: any;
     building: boolean;
+    job: string;
 }
 interface FlagMemory {}
 interface PowerCreepMemory {}
@@ -4899,7 +4900,7 @@ type GenericStore = GenericStoreBase & { [P in ResourceConstant]: number };
  * Parent object for structure classes
  */
 interface Structure<T extends StructureConstant = StructureConstant> extends RoomObject {
-    [x: string]: any;
+    store: any;
     readonly prototype: Structure;
 
     /**
