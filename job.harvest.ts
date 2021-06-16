@@ -1,6 +1,6 @@
 var RoleHarvest: any = {
     run: function(creep: Creep) {
-        if(creep.store.getFreeCapacity() > 0) {
+        if(!creep.memory.drop_off && creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
             var sources = creep.room.find(FIND_SOURCES, {
                 filter: (source) => {
                     return (source.energy > 50);
@@ -11,6 +11,11 @@ var RoleHarvest: any = {
             }
         }
         else {
+            if (creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
+                creep.memory.drop_off = false;
+            } else {
+                creep.memory.drop_off = true;
+            }
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) || structure.structureType === STRUCTURE_CONTAINER;
@@ -34,7 +39,7 @@ var RoleHarvest: any = {
         }
     },
 
-    small_harvesters: 0,
+    small_harvesters: 1,
     big_harvesters: 3,
     small_name: 'small',
     big_name: 'big',
