@@ -1,8 +1,6 @@
 var harvester = require('job.harvest')
 
 var roleBuilder: any = {
-
-    /** @param {Creep} creep **/
     run: function(creep: Creep) {
         // @ts-ignore
         if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
@@ -26,8 +24,42 @@ var roleBuilder: any = {
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if (sources.length > 1) {
+                for (let i = 1; i < sources.length; i++) {
+                    const source = sources[i];
+                    if (source.energy > 50) {
+                        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(source);
+                        }
+                        break;
+                    }
+                }
+            } else {
+                if (sources[0].energy > 50) {
+                    if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(sources[0]);
+                    }
+                }
+            }
+        }
+    },
+
+    builders: 2,
+    upkeep: function () {
+        // @ts-ignore
+        let cur_builders: number = 0;
+
+        for(const name in Game.creeps) {
+            const creep = Game.creeps[name];
+            if (creep.memory.job == 'builder') {
+                cur_builders += 1;
+            }
+        }
+        if (cur_builders < roleBuilder.builders) {
+            // @ts-ignore
+            // only log on success
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], `screep_builder_${Game.time}`, {memory: {job: 'builder'}}) === 0) {
+                console.log("spawning new builder");
             }
         }
     }

@@ -1,6 +1,4 @@
-var roleUpgrader: any = {
-
-    /** @param {Creep} creep **/
+var RoleUpgrade: any = {
     run: function(creep: Creep) {
         if(creep.store[RESOURCE_ENERGY] == 0) {
             var sources = creep.room.find(FIND_SOURCES);
@@ -15,7 +13,27 @@ var roleUpgrader: any = {
                 creep.moveTo(controller);
             }
         }
+    },
+
+    upgraders: 5,
+    upkeep: function () {
+        // @ts-ignore
+        let cur_upgraders: number = 0;
+
+        for(const name in Game.creeps) {
+            const creep = Game.creeps[name];
+            if (creep.memory.job == 'upgrade') {
+                cur_upgraders += 1;
+            }
+        }
+        if (cur_upgraders < RoleUpgrade.upgraders) {
+            // @ts-ignore
+            // only log on success
+            if (Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], `screep_upgrade_${Game.time}`, {memory: {job: 'upgrade'}}) === 0) {
+                console.log("spawning new upgrader");
+            }
+        }
     }
 };
 
-module.exports = roleUpgrader;
+module.exports = RoleUpgrade;

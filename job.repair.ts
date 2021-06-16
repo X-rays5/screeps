@@ -3,7 +3,8 @@ const repair_structures: Map<any, boolean> = new Map(
         [STRUCTURE_WALL, true],
         [STRUCTURE_ROAD, true],
         [STRUCTURE_EXTENSION, true],
-        [STRUCTURE_RAMPART, true]
+        [STRUCTURE_RAMPART, true],
+        [STRUCTURE_SPAWN, true]
     ]);
 
 var RoleRepair: any = {
@@ -21,7 +22,7 @@ var RoleRepair: any = {
             const structures: Structure[] = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
-                        structure.hits / structure.hitsMax * 100 < 50 && repair_structures.has(structure.structureType)
+                        structure.hits / structure.hitsMax * 100 < 100 && repair_structures.has(structure.structureType)
                     );
                 }
             })
@@ -30,22 +31,24 @@ var RoleRepair: any = {
                 const structure: Structure = structures[i];
                 if (structure.structureType == STRUCTURE_WALL) {
                     // @ts-ignore
-                    if (structure.hits / structure.hitsMax * 100 < 0.01) {
+                    if (structure.hits / structure.hitsMax * 100 < 0.015) {
                         // @ts-ignore
                         if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                             // @ts-ignore
                             creep.moveTo(structure);
                         }
+                        break;
                     } else {
                         continue;
                     }
                 } else if (structure.structureType == STRUCTURE_RAMPART) {
-                    if (structure.hits / structure.hitsMax * 100 < 10) {
+                    if (structure.hits / structure.hitsMax * 100 < 20) {
                         // @ts-ignore
                         if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                             // @ts-ignore
                             creep.moveTo(structure);
                         }
+                        break;
                     } else {
                         continue;
                     }
@@ -60,14 +63,42 @@ var RoleRepair: any = {
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);
-            for (let i = 0; i < sources.length; i++) {
-                const source = sources[i];
-                if (source.energy > 50) {
-                    if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source);
+            if (sources.length > 1) {
+                for (let i = 1; i < sources.length; i++) {
+                    const source = sources[i];
+                    if (source.energy > 50) {
+                        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(source);
+                        }
+                        break;
                     }
-                    break;
                 }
+            } else {
+                if (sources[0].energy > 50) {
+                    if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(sources[0]);
+                    }
+                }
+            }
+        }
+    },
+
+    repair: 3,
+    upkeep: function () {
+        // @ts-ignore
+        let cur_builders: number = 0;
+
+        for(const name in Game.creeps) {
+            const creep = Game.creeps[name];
+            if (creep.memory.job == 'repair') {
+                cur_builders += 1;
+            }
+        }
+        if (cur_builders < RoleRepair.repair) {
+            // @ts-ignore
+            // only log on success
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], `screep_repair_${Game.time}`, {memory: {job: 'repair'}}) === 0) {
+                console.log("spawning new repair");
             }
         }
     }
