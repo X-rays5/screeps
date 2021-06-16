@@ -24,21 +24,13 @@ var roleBuilder: any = {
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);
-            if (sources.length > 1) {
-                for (let i = 1; i < sources.length; i++) {
-                    const source = sources[i];
-                    if (source.energy > 50) {
-                        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(source);
-                        }
-                        break;
+            for (let i = 0; i < sources.length; i++) {
+                const source = sources[i];
+                if (source.energy > 50) {
+                    if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(source);
                     }
-                }
-            } else {
-                if (sources[0].energy > 50) {
-                    if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(sources[0]);
-                    }
+                    break;
                 }
             }
         }
