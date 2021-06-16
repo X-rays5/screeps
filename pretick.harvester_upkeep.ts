@@ -1,6 +1,6 @@
 var HarvesterUpkeep: any = {
     run: function () {
-        const small_harvesters = 4;
+        const small_harvesters = 3;
         const big_harvesters = 2;
         const small_name = 'small';
         const big_name = 'big';
@@ -32,7 +32,7 @@ var HarvesterUpkeep: any = {
         if (big < big_harvesters) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep( [WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], `screep_big_harvest_${Game.time}`, { memory: { job: 'harvest', type: big_name} } ) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep( [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE], `screep_big_harvest_${Game.time}`, { memory: { job: 'harvest', type: big_name} } ) === 0) {
                 console.log("spawning new big harvester");
             }
         }
