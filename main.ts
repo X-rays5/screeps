@@ -27,11 +27,15 @@ const job_handlers: Map<string, any> = new Map(
         ["repair", roleRepair]
     ])
 
+let last_pretick_run = 0;
+
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
-    CleanUp.run();
-
-    upkeep_handlers.forEach((value, key) => {value.run();});
+    if (Game.time - last_pretick_run >= 10) {
+        CleanUp.run();
+        upkeep_handlers.forEach((value, key) => {value.run();});
+        last_pretick_run = Game.time
+    }
 
     for (const name in Game.spawns) {
         const spawn = Game.spawns[name];
