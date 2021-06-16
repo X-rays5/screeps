@@ -16,7 +16,7 @@
     "typeRoots": [
 		"../"
     ],
-	"outDir": "C:/Users/X-ray/AppData/Local/Screeps/scripts/screeps.com/default"
+	"outDir": "build"
   },
   "exclude": [
     "node_modules"
