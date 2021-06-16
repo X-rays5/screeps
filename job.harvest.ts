@@ -22,14 +22,15 @@ var roleHarvester: any = {
                 }
             } else {
                 // make sure they are not blocking the resource collection
-                const target: AnyStructure[] = creep.room.find(FIND_STRUCTURES, {
+                creep.moveTo(Game.flags["harvester_idle"]);
+                /*const target: AnyStructure[] = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure: Structure) => {
                         return (structure.structureType == STRUCTURE_SPAWN);
                     }
                 });
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                }
+                }*/
             }
         }
     }
