@@ -6,6 +6,7 @@ var RoleDefender: any = {
             if (creep.attack(non_friendly_creeps[0]) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(non_friendly_creeps[0], {visualizePathStyle: {stroke: '#d91818'}});
             }
+            Game.notify("Defense job triggered");
             creep.say("⚔ defending");
         } else {
             creep.moveTo(Game.flags["harvester_idle"]);
