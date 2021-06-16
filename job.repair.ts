@@ -37,7 +37,7 @@ var RoleRepair: any = {
                             // @ts-ignore
                             creep.moveTo(structure);
                         }
-                        break;
+                        return;
                     } else {
                         continue;
                     }
@@ -48,7 +48,7 @@ var RoleRepair: any = {
                             // @ts-ignore
                             creep.moveTo(structure);
                         }
-                        break;
+                        return;
                     } else {
                         continue;
                     }
@@ -58,9 +58,11 @@ var RoleRepair: any = {
                         // @ts-ignore
                         creep.moveTo(structure);
                     }
-                    break;
+                    return;
                 }
             }
+            // if we get here there is nothing to do
+            creep.moveTo(Game.flags["construction_idle"]);
         } else {
             const sources = creep.room.find(FIND_SOURCES);
             if (sources.length > 1) {
@@ -97,7 +99,7 @@ var RoleRepair: any = {
         if (cur_builders < RoleRepair.repair) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], `screep_repair_${Game.time}`, {memory: {job: 'repair'}}) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], `screep_repair_${Game.time}`, {memory: {job: 'repair'}}) === 0) {
                 console.log("spawning new repair");
             }
         }
