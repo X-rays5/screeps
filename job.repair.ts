@@ -85,7 +85,7 @@ var RoleRepair: any = {
         }
     },
 
-    repair: 3,
+    repair: 2,
     upkeep: function () {
         // @ts-ignore
         let cur_builders: number = 0;

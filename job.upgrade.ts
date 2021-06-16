@@ -35,7 +35,7 @@ var RoleUpgrade: any = {
         }
     },
 
-    upgraders: 3,
+    upgraders: 2,
     upkeep: function () {
         // @ts-ignore
         let cur_upgraders: number = 0;
