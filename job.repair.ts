@@ -7,6 +7,8 @@ const repair_structures: Map<any, boolean> = new Map(
         [STRUCTURE_SPAWN, true]
     ]);
 
+var Harvester = require('job.harvest')
+
 var RoleRepair: any = {
     run: function (creep: Creep) {
         if(creep.memory.repairing && creep.store[RESOURCE_ENERGY] == 0) {
@@ -38,8 +40,6 @@ var RoleRepair: any = {
                             creep.moveTo(structure);
                         }
                         return;
-                    } else {
-                        continue;
                     }
                 } else if (structure.structureType == STRUCTURE_RAMPART) {
                     if (structure.hits / structure.hitsMax * 100 < 20) {
@@ -49,8 +49,6 @@ var RoleRepair: any = {
                             creep.moveTo(structure);
                         }
                         return;
-                    } else {
-                        continue;
                     }
                 } else {
                     // @ts-ignore
@@ -62,7 +60,7 @@ var RoleRepair: any = {
                 }
             }
             // if we get here there is nothing to do
-            creep.moveTo(Game.flags["construction_idle"]);
+            Harvester.run();
         } else {
             const sources = creep.room.find(FIND_SOURCES);
             if (sources.length > 1) {
