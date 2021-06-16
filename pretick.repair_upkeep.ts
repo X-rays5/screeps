@@ -1,4 +1,4 @@
-const repair = 4;
+const repair = 2;
 
 var RepairUpkeep: any = {
     run: function () {
