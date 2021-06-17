@@ -50,7 +50,11 @@ var RoleCarrier: any = {
                                 }
                                 return;
                             } else {
-                                creep.moveTo(Game.flags["carrier_idle"], {visualizePathStyle: {stroke: '#ffffff'}});
+                                if (creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
+                                    creep.memory.drop_off = true;
+                                } else {
+                                    creep.moveTo(Game.flags["carrier_idle"], {visualizePathStyle: {stroke: '#ffffff'}});
+                                }
                             }
                         }
                     }
