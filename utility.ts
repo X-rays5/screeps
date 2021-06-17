@@ -11,7 +11,9 @@ module.exports = {
     },
 
     TasksTick: async function() {
-        tasks.RunTasks();
-        tasks.RunDelayedTasks();
+        let task = require('utility.tasks')
+
+        task.RunTasks();
+        task.RunDelayedTasks();
     }
 }
