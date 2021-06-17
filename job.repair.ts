@@ -40,6 +40,8 @@ var RoleRepair: any = {
                             creep.moveTo(structure);
                         }
                         return;
+                    } else {
+                        continue;
                     }
                 } else if (structure.structureType == STRUCTURE_RAMPART) {
                     if (structure.hits / structure.hitsMax * 100 < 20) {
@@ -49,6 +51,8 @@ var RoleRepair: any = {
                             creep.moveTo(structure);
                         }
                         return;
+                    } else {
+                        continue;
                     }
                 } else {
                     // @ts-ignore
@@ -60,7 +64,7 @@ var RoleRepair: any = {
                 }
             }
             // if we get here there is nothing to do
-            Harvester.run();
+            Harvester.run(creep);
         } else {
             const sources = creep.room.find(FIND_SOURCES);
             if (sources.length > 1) {
