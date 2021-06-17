@@ -35,7 +35,7 @@ var RoleCarrier: any = {
                     } else {
                         const extensions = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
-                                return (structure.structureType === STRUCTURE_EXTENSION && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
+                                return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                             }
                         })
                         if (extensions.length > 0) {
@@ -68,7 +68,7 @@ var RoleCarrier: any = {
             }
             const extensions = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_EXTENSION && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
+                    return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                 }
             })
 

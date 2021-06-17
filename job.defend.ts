@@ -1,5 +1,18 @@
 var RoleDefender: any = {
     run: function (creep: Creep) {
+        const attacking = creep.memory.attacking;
+        if (attacking && attacking.hits > 0) {
+            if (creep.attack(creep.memory.attacking) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(creep.memory.attacking);
+            }
+            return;
+        }
+
+        if (creep.memory.defend_room !== creep.room.name) {
+            // @ts-ignore
+            creep.moveTo(Game.rooms[creep.memory.defend_room].controller);
+            return;
+        }
         const non_friendly_creeps = creep.room.find(FIND_HOSTILE_CREEPS);
 
         if (non_friendly_creeps.length > 0) {
@@ -27,7 +40,7 @@ var RoleDefender: any = {
         if (cur_healers < RoleDefender.defenders) {
             // @ts-ignore
             // only log on success
-            if (Game.spawns['Spawn1'].spawnCreep([ATTACK,ATTACK,TOUGH,TOUGH,TOUGH,MOVE,MOVE], `screep_defender_${Game.time}`, {memory: {job: 'defend'}}) === 0) {
+            if (Game.spawns['Spawn1'].spawnCreep([ATTACK,ATTACK,TOUGH,TOUGH,TOUGH,MOVE,MOVE], `screep_defender_${Game.time}`, {memory: {job: 'defend', defend_room: Game.spawns['Spawn1'].room.name}}) === 0) {
                 console.log("spawning new defender");
             }
         }

@@ -49,3 +49,36 @@ module.exports.loop = function () {
     }
     console.log(`----- tick: ${Game.time} end -----`);
 }
+
+const AttackCreepById = function(room: string, id: string) {
+    const target = Game.rooms[room].find(FIND_CREEPS, {
+        filter: (creep) => {
+            return (creep.id === id);
+        }
+    })
+    for (const name in Game.creeps) {
+        const creep = Game.creeps[name];
+        if (creep.memory.job === 'defend') {
+            creep.memory.attacking = target[0];
+        }
+    }
+}
+
+const DefendRoom = function(room: string) {
+    for (const name in Game.creeps) {
+        const creep = Game.creeps[name];
+        if (creep.memory.job === 'defend') {
+            creep.memory.defend_room = room;
+        }
+    }
+}
+
+const StopAttacking = function() {
+    for (const name in Game.creeps) {
+        const creep = Game.creeps[name];
+        if (creep.memory.job === 'defend') {
+            // @ts-ignore
+            creep.memory.attacking = 0;
+        }
+    }
+}
