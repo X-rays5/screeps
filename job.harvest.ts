@@ -40,8 +40,8 @@ var RoleHarvest: any = {
         }
     },
 
-    small_harvesters: 1,
-    big_harvesters: 3,
+    small_harvesters: 0,
+    big_harvesters: 4,
     small_name: 'small',
     big_name: 'big',
     upkeep: function () {
