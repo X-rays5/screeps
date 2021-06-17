@@ -6,6 +6,7 @@ let init = false;
 module.exports.loop = function () {
     if (!init) {
         init = !init;
+        utility_tasks.RunEvery(30, utility.CleanMemory);
     }
     console.log(`--- start of tick ${Game.time} ---`);
     utility.TasksTick();
