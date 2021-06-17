@@ -1,5 +1,6 @@
 module.exports = {
     run: async function (creep: Creep) {
+        const utility = require('utility');
         if (creep.memory.collecting && creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
             const sources = utility.GetSources(creep.room.name);
             if (sources.length > 0) {
@@ -43,6 +44,8 @@ module.exports = {
 
     harvesters: 2,
     upkeep: async function () {
+        const config = require('config');
+        const utility = require('utility');
         if (utility.GetCreepsFromJob('harvest').length < this.harvesters) {
             await utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'harvest'});
         }
