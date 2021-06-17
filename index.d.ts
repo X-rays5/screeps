@@ -1379,7 +1379,7 @@ interface Creep extends RoomObject {
      * The cumulative effect of all the creeps performing upgradeController in the current tick is taken into account.
      * @param target The target controller object to be upgraded.
      */
-    upgradeController(target: StructureController): ScreepsReturnCode;
+    upgradeController(target: StructureController | undefined): ScreepsReturnCode;
     /**
      * Withdraw resources from a structure, a tombstone or a ruin.
      *
@@ -3205,15 +3205,7 @@ interface Memory {
 }
 
 interface CreepMemory {
-    defend_room: string;
-    attacking: Creep;
-    drop_off: boolean;
-    upgrading: boolean;
-    storing: boolean;
-    collecting: boolean;
-    repairing: boolean;
-    type: any;
-    building: boolean;
+    collecting: Boolean;
     job: string;
 }
 interface FlagMemory {}
@@ -3222,6 +3214,7 @@ interface RoomMemory {
     heal_targets: Array<Creep>;
 }
 interface SpawnMemory {
+    spawn_queue: SpawnQueueItem[];
     lastspawned: string;
 }
 
@@ -4728,7 +4721,7 @@ interface StructureSpawn extends OwnedStructure<STRUCTURE_SPAWN> {
      *  * TOUGH
      *  * CLAIM
      * @param name The name of a new creep. It must be a unique creep name, i.e. the Game.creeps object should not contain another creep with the same name (hash key).
-     * @param opts An object with additional options for the spawning process.
+     * @param opts? An object with additional options for the spawning process.
      * @returns One of the following codes:
      * ```
      * OK                       0   The operation has been scheduled successfully.
