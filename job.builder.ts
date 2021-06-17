@@ -13,15 +13,17 @@ var roleBuilder: any = {
         }
 
         if(creep.memory.building) {
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+            for (const name in Game.rooms) {
+                const targets = Game.rooms[name].find(FIND_CONSTRUCTION_SITES);
+                if(targets.length > 0) {
+                    if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0]);
+                    }
+                    return;
                 }
-            } else {
-                // no build jobs so help the harvesters
-                harvester.run(creep);
             }
+            // no build jobs so help the harvesters
+            harvester.run(creep);
         } else {
             const sources = creep.room.find(FIND_SOURCES);
             for (let i = 0; i < sources.length; i++) {
