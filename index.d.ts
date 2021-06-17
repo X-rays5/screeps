@@ -3205,6 +3205,8 @@ interface Memory {
 }
 
 interface CreepMemory {
+    defend_room: string;
+    attacking: Creep;
     drop_off: boolean;
     upgrading: boolean;
     storing: boolean;

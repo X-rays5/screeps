@@ -1,4 +1,3 @@
 tsc --build
-DIR=$screeps_build
 cd build
-cp -R ./. $DIR/default/
+cp -R ./. C:/Users/X-ray/AppData/Local/Screeps/scripts/localhost___21025/default
