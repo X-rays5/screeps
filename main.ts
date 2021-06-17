@@ -22,7 +22,6 @@ const job_handlers: Map<string, any> = new Map(
     ])
 
 let last_pretick_run = 0;
-let last_spawn_notify_prod = 0;
 
 module.exports.loop = function () {
     console.log(`----- tick: ${Game.time} start -----`);
@@ -34,18 +33,6 @@ module.exports.loop = function () {
         CleanUp.run();
         job_handlers.forEach((value, key) => {value.upkeep();});
         last_pretick_run = Game.time
-    }
-
-    if (Game.time - last_spawn_notify_prod > 5) {
-        for (const name in Game.spawns) {
-            const spawn = Game.spawns[name];
-            if (spawn.spawning) {
-                // @ts-ignore
-                const spawningCreep = Game.creeps[spawn.spawning.name];
-                spawn.memory.lastspawned = spawningCreep.memory.job
-            }
-        }
-        last_spawn_notify_prod = Game.time;
     }
 
     for(const name in Game.creeps) {
