@@ -1,3 +1,5 @@
+var Upgrade = require('job.upgrade');
+
 var RoleHarvest: any = {
     run: function(creep: Creep) {
         if(!creep.memory.drop_off && creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
@@ -33,7 +35,7 @@ var RoleHarvest: any = {
                 }
             } else {
                 // make sure they are not blocking the resource collection
-                creep.moveTo(Game.flags["harvester_idle"]);
+                Upgrade.run(creep);
             }
         }
     },
