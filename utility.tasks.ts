@@ -10,8 +10,8 @@ interface Task {
 }
 
 module.exports = {
-    DelayedTasks: [],
-    Tasks: [],
+    DelayedTasks: new Array<DelayedTask>(),
+    Tasks: new Array<Task>(),
 
     RunDelayed: async function (runin: number, cb: () => void) {
         runin += Game.time;
@@ -23,20 +23,21 @@ module.exports = {
         this.Tasks.push({runin, runevery, cb});
     },
 
-    RunDelayedTasks: async function () {
-        for (let i = 0; i < this.DelayedTasks.length; i++) {
-            const task = (this.DelayedTasks)[i];
+    RunDelayedTasks: function () {
+        this.DelayedTasks.forEach((task: { runin: number; cb: () => void; }, index: number) => {
             if (task.runin === Game.time) {
-                this.DelayedTasks.splice(i, 1);
-                task.cb();
+                //this.DelayedTasks.splice(index, 1);
+                console.log("executing delayed task");
+                task.cb()
             }
-        }
+        })
     },
 
-    RunTasks: async function() {
+    RunTasks: function() {
         for (let i = 0; i < this.Tasks.length; i++) {
             const task = (this.Tasks)[i];
             if (task.runin === Game.time) {
+                console.log("Executing task");
                 task.cb();
                 task.runin = task.runevery + Game.time;
             }

@@ -8,7 +8,8 @@ module.exports.loop = function () {
     if (!init) {
         utility_tasks.RunEvery(30, utility.CleanMemory);
         utility_tasks.RunEvery(10, utility.SpawnQueueTick);
-        utility_tasks.RunEvery(10, utility_jobs.DoUpkeep);
+        utility_tasks.RunDelayed(10, () => {utility.SpawnQueueTick().catch()});
+        //utility_tasks.RunEvery(10, utility_jobs.DoUpkeep);
         init = !init;
     }
     console.log(`--- start of tick ${Game.time} ---`);
