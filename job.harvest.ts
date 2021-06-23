@@ -46,8 +46,10 @@ module.exports = {
     upkeep: async function () {
         const config = require('config');
         const utility = require('utility');
-        if (utility.GetCreepsFromJob('harvest').length < this.harvesters) {
-            await utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'harvest'});
+
+        const creeps: Creep[] = await utility.GetCreepsFromJob('harvest')
+        if (creeps.length < this.harvesters) {
+            utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'harvest'});
         }
     }
 }

@@ -28,7 +28,9 @@ module.exports = {
     upkeep: async function () {
         const config = require('config');
         const utility = require('utility');
-        if (utility.GetCreepsFromJob('upgrade').length < this.upgraders) {
+
+        const creeps: Creep[] = await utility.GetCreepsFromJob('upgrade');
+        if (creeps.length < this.upgraders) {
             await utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'upgrade'});
         }
     }
