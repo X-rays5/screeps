@@ -49,7 +49,7 @@ module.exports = {
 
         const creeps: Creep[] = await utility.GetCreepsFromJob('harvest')
         if (creeps.length < this.harvesters) {
-            utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'harvest'});
+            await utility.SpawnCreep(config.main_room, [WORK,CARRY,MOVE], {collecting: true, job: 'harvest'});
         }
     }
 }
