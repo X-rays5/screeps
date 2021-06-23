@@ -13,6 +13,12 @@ module.exports.loop = function () {
     console.log(`--- end of tick ${Game.time} ---`);
 }
 
+// clear queue on script reload to avoid conflicting changes
+for (const name in Game.spawns) {
+    const spawn = Game.spawns[name];
+    spawn.memory.spawn_queue = [];
+}
+
 // setup tasks
 utility_tasks.RunEvery(1, utility.CleanMemory).catch((error: any) => {console.log(error);});
 utility_tasks.RunEvery(1, utility.SpawnQueueTick).catch((error: any) => {console.log(error);});
