@@ -23,24 +23,24 @@ module.exports = {
         this.Tasks.push({runin, runevery, cb});
     },
 
-    RunDelayedTasks: function () {
+    RunDelayedTasks: async function () {
         this.DelayedTasks.forEach((task: { runin: number; cb: () => void; }, index: number) => {
             if (task.runin === Game.time) {
-                //this.DelayedTasks.splice(index, 1);
-                console.log("executing delayed task");
-                task.cb()
+                this.DelayedTasks.splice(index, 1);
+                task.cb();
             }
         })
+        await console.log("Executed all delayed tasks");
     },
 
-    RunTasks: function() {
+    RunTasks: async function() {
         for (let i = 0; i < this.Tasks.length; i++) {
             const task = (this.Tasks)[i];
             if (task.runin === Game.time) {
-                console.log("Executing task");
                 task.cb();
                 task.runin = task.runevery + Game.time;
             }
         }
+        await console.log("Executed all tasks");
     }
 }

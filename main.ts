@@ -22,4 +22,4 @@ for (const name in Game.spawns) {
 // setup tasks
 utility_tasks.RunEvery(1, utility.CleanMemory).catch((error: any) => {console.log(error);});
 utility_tasks.RunEvery(1, utility.SpawnQueueTick).catch((error: any) => {console.log(error);});
-utility_tasks.RunEvery(10, utility_jobs.DoUpkeep).catch((error: any) => {console.log(error);});
+//utility_tasks.RunEvery(10, utility_jobs.DoUpkeep).catch((error: any) => {console.log(error);});
