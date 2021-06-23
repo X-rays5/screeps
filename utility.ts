@@ -28,12 +28,13 @@ module.exports = {
     },
 
     SpawnCreep: async function(room: string, BodyParts: BodyPartConstant[], memory: CreepMemory) {
-        const spawns = Game.rooms[room].find(FIND_MY_SPAWNS);
-        if (spawns.length > 0) {
-            const spawn = spawns[0];
-            console.log(spawn);
-            spawn.memory.spawn_queue.push({BodyParts, memory});
-            console.log(`Added creep to spawn list\n Room: ${room}, BodyParts: ${BodyParts}, Job: ${memory.job}`);
+        for (const name in Game.spawns) {
+            if (Game.spawns[name].room.name === room) {
+                const spawn = Game.spawns[name];
+                spawn.memory.spawn_queue.push({BodyParts, memory});
+                console.log(`Added creep to spawn list\n Room: ${room}, BodyParts: ${BodyParts}, Job: ${memory.job}`);
+                break;
+            }
         }
     },
 
