@@ -44,7 +44,7 @@ module.exports = {
     GetCreepsFromJob: function(job: string): Creep[] {
         let return_v: Creep[] = [];
         for (const name in Game.creeps) {
-            const creep = Game.creeps[name];
+            const creep: Creep = Game.creeps[name];
             if (creep.memory.job === job) {
                 return_v.push(creep);
             }
@@ -63,7 +63,7 @@ module.exports = {
     TasksTick: async function() {
         let task = require('utility.tasks')
 
-        //task.RunTasks();
+        task.RunTasks();
         await task.RunDelayedTasks();
     }
 }
