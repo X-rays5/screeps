@@ -16,17 +16,13 @@ module.exports = {
 
     SpawnQueueTick: async function() {
         console.log("spawn tick");
-        for (const room in Game.rooms) {
-            const spawns = Game.rooms[room].find(FIND_MY_SPAWNS, {
-                filter: (spawn) => {
-                    return (spawn.memory.spawn_queue.length > 0);
-                }
-            });
+        for (const name in Game.spawns) {
+            const spawn: StructureSpawn = Game.spawns[name];
+            const queue: SpawnQueueItem[] = spawn.memory.spawn_queue;
 
-            if (spawns.length > 0) {
-                const creep = spawns[0].memory.spawn_queue;
-                spawns[0].spawnCreep(creep[0].BodyParts, `${Game.time}_${creep[0].memory.job}`, {memory: creep[0].memory});
-                console.log(`Spawning ${Game.time}_${creep[0].memory.job}`);
+            if (queue.length > 0) {
+                spawn.spawnCreep(queue[0].BodyParts, `${Game.time}_${queue[0].memory.job}`, {memory: queue[0].memory});
+                console.log(`Spawning ${Game.time}_${queue[0].memory.job}`);
             }
         }
     },
